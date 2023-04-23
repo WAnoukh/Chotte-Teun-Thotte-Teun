@@ -1,0 +1,143 @@
+@startuml haha
+
+enum chiffre {
+    un
+    deux
+    trois
+    quatre
+    cinq
+    six
+    sept
+    huit
+    neuf
+}
+
+enum couleur {
+    bleu
+    jaune
+    rouge
+    vert clair
+    vert foncé
+    violet
+}
+
+'tous les enfants auront la méthode activation
+'activation() est une abstraction
+class Carte <abstraite> {
+    nom : string
+    activation() 
+}
+
+class Clan {
+    couleur : enum
+    numero : enum
+}
+
+class Tactique {
+
+}
+
+class Jeu <singleton> {
+
+}
+
+class Pioche {
+    cartes : Cartes**
+    nombre_cartes : int
+    nombre_max_cartes : int
+    'à garder ?
+    piocher()
+}
+
+'Singleton ??
+class Controleur <singleton> {
+    initialiser()
+}
+
+class Plateau {
+
+}
+
+class Borne {
+    CombinaisonJoueur1 : Combinaison
+    CombinaisonJoueur2 : Combinaison
+    nb_max : int
+
+    id : int {1..9} 
+
+    'Ou : CombinaisonJoueur1 : Carte** // CombinaisonJoueur2 : Carte**  (?)
+}
+
+'supprimer combinaison ? 
+'comment faire en sorte que la combi (avec ou non une carte Tactique apposée sur la borne)
+'s'évalue correctement ?
+class Combinaison {
+
+}
+
+class Main {
+    
+}
+
+'Fusionner Joueur et Main ? 
+class Joueur {
+    nom : string
+    est_IA : bool
+    'détermine si le Joueur est une IA ou non
+
+    fonctionIA()
+    'à garder ?
+}
+
+class Elite {
+
+}
+
+class ModeDeCombat {
+
+}
+
+
+class Ruses {
+    'Les cartes ruses, à la fin de leur utilisation, vont ds la défausse
+
+}
+
+'faire une classe fille pour un seul objet ?
+class RuseChildren {}
+
+class ModeDeCombatChildren {}
+
+'Composition Plateau / Borne
+'-> permet de réinitialiser le jeu à la fin/ au début de chaque manche
+Carte <|-- Clan
+Carte <|-- Tactique
+
+Tactique <|-- Elite
+Tactique <|-- ModeDeCombat
+Tactique <|-- Ruses
+
+Ruses <|-- RuseChildren
+ModeDeCombat <|-- ModeDeCombatChildren
+
+Jeu *-- Carte
+Plateau *-- Borne
+
+Borne *--Combinaison
+
+Carte --o Pioche
+Carte --o Plateau
+Carte --o Combinaison
+
+Joueur o-- Main
+
+Main o-- Carte
+
+
+Controleur *-- Plateau
+Controleur *-- Pioche
+Controleur *-- Joueur
+Controleur -- Jeu
+
+
+@enduml
